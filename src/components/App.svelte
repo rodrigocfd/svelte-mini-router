@@ -1,1 +1,5 @@
-<h1>Hi</h1>
+<script lang="ts">
+import Router from '@/router/Router.svelte';
+</script>
+
+<Router />
