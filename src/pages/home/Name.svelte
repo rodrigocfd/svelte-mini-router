@@ -1,6 +1,4 @@
 <script lang="ts">
-import {onMount} from 'svelte';
-
 const props: {
 	name: string;
 	onClick(name: string): void;
@@ -12,7 +10,7 @@ const state = $state({
 
 let txtStuff: HTMLInputElement;
 
-onMount(() => {
+$effect(() => {
 	txtStuff.focus();
 });
 
