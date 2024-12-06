@@ -1,11 +1,11 @@
 <script lang="ts">
-import {navLink} from '@/router';
+import * as router from '@/router';
 </script>
 
 <h1>Second page</h1>
 
 <div>
-	<a href={navLink('/')}>Home</a>
+	<a href={router.link('/')}>Home</a>
 </div>
 
 <style>

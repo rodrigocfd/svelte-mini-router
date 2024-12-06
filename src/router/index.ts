@@ -6,12 +6,12 @@ const parts = allParts.slice(idxBasePart + 1);
 /**
  * Current application path.
  */
-export const path = parts.join('/');
+export const path = '/' + parts.join('/');
 
 /**
- * Generates a navigable link.
+ * Generates a navigable link for the given path.
  */
-export function navLink(path: string): string {
+export function link(path: string): string {
 	if (path.startsWith('/')) {
 		path = path.substring(1);
 	}
@@ -22,9 +22,9 @@ export function navLink(path: string): string {
 }
 
 /**
- * Navigates immediately.
+ * Navigates immediately to the given path.
  */
 export function navigate(path: string): void {
-	const link = navLink(path);
-	window.location.href = link;
+	const newUrl = link(path);
+	window.location.href = newUrl;
 }
