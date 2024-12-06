@@ -5,3 +5,9 @@ import Router from '@/router/Router.svelte';
 <h1>Wikipedia Templates</h1>
 
 <Router />
+
+<style>
+	h1 {
+		color: cornflowerblue;
+	}
+</style>

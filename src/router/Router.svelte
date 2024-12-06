@@ -1,8 +1,8 @@
 <script lang="ts">
 import {path} from './index';
-import Home from '@/components/Home.svelte';
-import Page1 from '@/components/Page1.svelte';
-import Page2 from '@/components/Page2.svelte';
+import Home from '@/pages/home/Home.svelte';
+import Page1 from '@/pages/page1/Page1.svelte';
+import Page2 from '@/pages/page2/Page2.svelte';
 import Error404 from './Error404.svelte';
 </script>
 
