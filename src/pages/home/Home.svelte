@@ -12,6 +12,7 @@ const state = $state({
 <div>
 	<a href={router.link('/page1')}>Page 1</a>
 	<a href={router.link('/page2')}>Page 2</a>
+	<a href={router.link('/citar-web')}>Citar Web</a>
 </div>
 
 <Name name={state.name} onClick={n => state.name = n} />
