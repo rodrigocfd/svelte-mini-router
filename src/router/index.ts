@@ -9,8 +9,8 @@ const parts = allParts.slice(idxBasePart + 1);
 export interface Route {
 	/** URL path to match. */
 	path: string;
-	/** Path to component; if not specified, will follow URL path name. */
-	component?: string;
+	/** If specified, will effectively render this path. */
+	redirect?: string;
 }
 
 /**

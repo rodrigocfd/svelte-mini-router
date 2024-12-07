@@ -6,23 +6,12 @@
 	let componentPath = '../pages';
 
 	if (route !== undefined) {
-		if (route.component !== undefined) {
-			componentPath += slashPrefix(route.component); // user defined a component, use it
-		} else {
-			componentPath += slashPrefix(route.path) + '/'
-				+ pathToComponentName(route.path)
-				+ '.svelte';
-		}
+		const effectivePath = (route.redirect === undefined) ? route.path : route.redirect;
+		componentPath += slashPrefix(effectivePath) + '/+page.svelte';
 	}
 
 	function slashPrefix(p: string): string {
 		return (p.startsWith('/') ? '' : '/') + p;
-	}
-	function pathToComponentName(p: string): string {
-		return (p.startsWith('/') ? p.slice(1) : p)
-			.split('-')
-			.map(p => p.charAt(0).toUpperCase() + p.slice(1))
-			.join('');
 	}
 </script>
 

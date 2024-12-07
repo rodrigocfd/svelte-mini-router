@@ -1,10 +1,11 @@
 import type {Route} from './index';
 
 /**
- * Application routes.
+ * Application routes, will render "+page.svelte" component.
  */
 const routes: Route[] = [
-	{path: '/',          component: 'home/Home.svelte'},
+	{path: '/', redirect: '/home'},
+	{path: '/home'},
 	{path: '/citar-web'},
 	{path: '/page1'},
 	{path: '/page2'},
