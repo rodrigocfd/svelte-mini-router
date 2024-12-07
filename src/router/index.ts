@@ -1,7 +1,17 @@
+import type {Component} from 'svelte';
+
 const BASE = 'wikipedia-templates';
 const allParts = window.location.pathname.split('/');
 const idxBasePart = allParts.findIndex(p => p === BASE);
 const parts = allParts.slice(idxBasePart + 1);
+
+/**
+ * Path and component to an application route.
+ */
+export interface Route {
+	path: string;
+	render: Component;
+}
 
 /**
  * Current application path.
@@ -9,7 +19,7 @@ const parts = allParts.slice(idxBasePart + 1);
 export const path = '/' + parts.join('/');
 
 /**
- * Generates a navigable link for the given path.
+ * Generates a navigable link to the given path.
  */
 export function link(path: string): string {
 	if (path.startsWith('/')) {
