@@ -2,18 +2,12 @@
 	import {path} from './index';
 	import routes from './routes';
 
-	const route = routes.find(r => slashPrefix(r.path) === path);
-	let componentPath = '../pages';
-
-	if (route !== undefined) {
-		const effectivePath = (route.redirect === undefined) ? route.path : route.redirect;
-		componentPath += slashPrefix(effectivePath) + '/+page.svelte';
-	}
-
-	function slashPrefix(p: string): string {
-		const p2 = p.endsWith('/') ? p.substring(0, p.length - 1) : p;
-		return (p2.startsWith('/') ? '' : '/') + p2;
-	}
+	const route = routes.find(r => {
+		let p = r.path;
+		if (p.endsWith('/')) p = p.substring(0, p.length - 1); // remove trailing "/"
+		if (!p.startsWith('/')) p = '/' + p; // always prefix with "/"
+		return path === p;
+	});
 </script>
 
 {#if route === undefined}
@@ -21,7 +15,7 @@
 		<Error404 />
 	{/await}
 {:else}
-	{#await import(/* @vite-ignore */ componentPath) then {default: CurComp}}
-		<CurComp />
+	{#await route.render() then {default: RouteComponent}}
+		<RouteComponent />
 	{/await}
 {/if}
