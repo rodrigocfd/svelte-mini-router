@@ -7,8 +7,10 @@ const parts = allParts.slice(idxBasePart + 1);
  * Path and component to an application route.
  */
 export interface Route {
+	/** URL path to match. */
 	path: string;
-	render: string;
+	/** Path to component; if not specified, will follow URL path name. */
+	component?: string;
 }
 
 /**
