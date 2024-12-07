@@ -11,7 +11,8 @@
 	}
 
 	function slashPrefix(p: string): string {
-		return (p.startsWith('/') ? '' : '/') + p;
+		const p2 = p.endsWith('/') ? p.substring(0, p.length - 1) : p;
+		return (p2.startsWith('/') ? '' : '/') + p2;
 	}
 </script>
 
