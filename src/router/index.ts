@@ -1,5 +1,3 @@
-import type {Component} from 'svelte';
-
 const BASE = 'wikipedia-templates';
 const allParts = window.location.pathname.split('/');
 const idxBasePart = allParts.findIndex(p => p === BASE);
@@ -10,7 +8,7 @@ const parts = allParts.slice(idxBasePart + 1);
  */
 export interface Route {
 	path: string;
-	render: Component;
+	render: string;
 }
 
 /**

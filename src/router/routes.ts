@@ -1,18 +1,13 @@
 import type {Route} from './index';
 
-import Home from '@/pages/home/Home.svelte';
-import CitarWeb from '@/pages/citar-web/CitarWeb.svelte';
-import Page1 from '@/pages/page1/Page1.svelte';
-import Page2 from '@/pages/page2/Page2.svelte';
-
 /**
  * Application routes.
  */
 const routes: Route[] = [
-	{path: '/',          render: Home},
-	{path: '/citar-web', render: CitarWeb},
-	{path: '/page1',     render: Page1},
-	{path: '/page2',     render: Page2},
+	{path: '/',          render: 'home/Home.svelte'},
+	{path: '/citar-web', render: 'citar-web/CitarWeb.svelte'},
+	{path: '/page1',     render: 'page1/Page1.svelte'},
+	{path: '/page2',     render: 'page2/Page2.svelte'},
 ];
 
 export default routes;

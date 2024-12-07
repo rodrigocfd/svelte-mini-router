@@ -1,13 +1,16 @@
 <script lang="ts">
 	import {path} from './index';
 	import routes from './routes';
-	import Error404 from './Error404.svelte';
 
-	const CurElem = routes.find(r => r.path === path)?.render;
+	const curComp = routes.find(r => r.path === path)?.render;
 </script>
 
-{#if CurElem === undefined}
-	<Error404 />
+{#if curComp === undefined}
+	{#await import('./Error404.svelte') then {default: Error404}}
+		<Error404 />
+	{/await}
 {:else}
-	<CurElem />
+	{#await import('../pages/' + curComp) then {default: CurComp}}
+		<CurComp />
+	{/await}
 {/if}
