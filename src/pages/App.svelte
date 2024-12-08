@@ -1,10 +1,19 @@
 <script lang="ts">
-import Router from '@/router/Router.svelte';
+	import {AppRouter} from '@/router';
+
+	const baseUrl = '/wikipedia-templates';
+
+	const routes = [
+		{path: '/',          render: () => import('./home/+page.svelte')},
+		{path: '/citar-web', render: () => import('./citar-web/+page.svelte')},
+		{path: '/page1',     render: () => import('./page1/+page.svelte')},
+		{path: '/page2',     render: () => import('./page2/+page.svelte')},
+	];
 </script>
 
 <h1>Wikipedia Templates</h1>
 
-<Router />
+<AppRouter {baseUrl} {routes} />
 
 <style>
 	h1 {
