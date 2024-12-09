@@ -9,6 +9,18 @@ export interface Route {
 }
 
 /**
+ * Router configuration.
+ */
+export interface RouterConf {
+	/** Base URL, as defined in vite.config.ts. */
+	baseUrl?: string;
+	/** Application routes. */
+	routes: Route[];
+	/** Error 404 route; if not defined, a simple "404 - Not found" text will be displayed. */
+	render404?(): Promise<any>;
+}
+
+/**
  * Router state.
  */
 const routerState = $state({

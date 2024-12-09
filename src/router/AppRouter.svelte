@@ -1,21 +1,23 @@
 <script lang="ts">
-	import {type Route, findCurrentRoute, setBaseUrl} from './funcs.svelte';
+	import {type RouterConf, findCurrentRoute, setBaseUrl} from './funcs.svelte';
 
 	const props: {
-		/** Base URL, as defined in vite.config.ts. */
-		baseUrl?: string;
-		/** Application routes. */
-		routes: Route[];
+		/** Router configuration. */
+		routerConf: RouterConf;
 	} = $props();
 
-	setBaseUrl(props.baseUrl);
-	const currentRoute = $derived(findCurrentRoute(props.routes));
+	setBaseUrl(props.routerConf.baseUrl);
+	const currentRoute = $derived(findCurrentRoute(props.routerConf.routes));
 </script>
 
 {#if currentRoute === undefined}
-	{#await import('./Error404.svelte') then {default: Error404}}
-		<Error404 />
-	{/await}
+	{#if props.routerConf.render404 !== undefined}
+		{#await props.routerConf.render404() then {default: Route404Component}}
+			<Route404Component />
+		{/await}
+	{:else}
+		404 - Not found
+	{/if}
 {:else}
 	{#await currentRoute.render() then {default: RouteComponent}}
 		<RouteComponent />
