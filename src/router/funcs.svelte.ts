@@ -53,7 +53,7 @@ function sanitizePath(path: string): string {
 /**
  * Defines the baseUrl; should be called once, when the page loads.
  */
-export function setBaseUrl(baseUrl?: string): void {
+export function initInternalState(baseUrl?: string): void {
 	if (baseUrl !== undefined) {
 		routerState.baseUrl = sanitizePath(baseUrl);
 	}
@@ -75,7 +75,8 @@ export function generateFullUrl(path: string): string {
 }
 
 /**
- * Navigates immediately to the given path.
+ * Navigates immediately to the given path, which will trigger the rendering of
+ * the new route component.
  */
 export function navigate(path: string): void {
 	const path2 = sanitizePath(path);
@@ -84,7 +85,8 @@ export function navigate(path: string): void {
 }
 
 /**
- * Back or forward button; update current URL state.
+ * Back or forward button; updates current URL state, which will trigger the
+ * rendering of the current route component.
  */
 window.onpopstate = () => {
 	routerState.path = getCurrentUrlPath();

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import {saida, state} from './store.svelte';
+import {saida, state} from './store.svelte';
 
-	let txtUrl: HTMLInputElement;
-	$effect(() => {
-		txtUrl.focus();
-	});
+let txtUrl: HTMLInputElement;
+$effect(() => {
+	txtUrl.focus();
+});
 </script>
 
 <div class="campos">

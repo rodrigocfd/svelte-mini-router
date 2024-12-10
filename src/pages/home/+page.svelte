@@ -1,10 +1,10 @@
 <script lang="ts">
-	import {Link} from '@/router';
-	import Name from './Name.svelte';
+import {Link} from '@/router';
+import Name from './Name.svelte';
 
-	const state = $state({
-		name: 'tomato',
-	});
+const state = $state({
+	name: 'tomato',
+});
 </script>
 
 <h1>Home</h1>

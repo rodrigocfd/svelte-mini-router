@@ -1,8 +1,12 @@
+<!--
+	@component Generates an anchor element which will redirect to a route path.
+-->
 <script lang="ts">
 import type {Snippet} from 'svelte';
 import {generateFullUrl, navigate} from './funcs.svelte';
 
 const props: {
+	/** Route path to redirect when the anchor is clicked. */
 	path: string;
 	children: Snippet;
 } = $props();

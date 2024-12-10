@@ -1,13 +1,16 @@
+<!--
+	@component Renders the current route component.
+-->
 <script lang="ts">
-	import {type RouterConf, findCurrentRoute, setBaseUrl} from './funcs.svelte';
+import {type RouterConf, findCurrentRoute, initInternalState} from './funcs.svelte';
 
-	const props: {
-		/** Router configuration. */
-		routerConf: RouterConf;
-	} = $props();
+const props: {
+	/** Router configuration. */
+	routerConf: RouterConf;
+} = $props();
 
-	setBaseUrl(props.routerConf.baseUrl);
-	const currentRoute = $derived(findCurrentRoute(props.routerConf.routes));
+initInternalState(props.routerConf.baseUrl);
+const currentRoute = $derived(findCurrentRoute(props.routerConf.routes));
 </script>
 
 {#if currentRoute === undefined}
