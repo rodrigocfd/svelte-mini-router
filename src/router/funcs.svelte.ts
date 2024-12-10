@@ -1,3 +1,5 @@
+import type {Component} from 'svelte';
+
 /**
  * Path and component to an application route, to be defined by the user.
  */
@@ -5,7 +7,7 @@ export interface Route {
 	/** URL path to match. */
 	path: string;
 	/** Function which lazy loads the component to be rendered. */
-	render(): Promise<any>;
+	render(): Promise<{default: Component}>;
 }
 
 /**
@@ -17,7 +19,7 @@ export interface RouterConf {
 	/** Application routes. */
 	routes: Route[];
 	/** Error 404 route; if not defined, a simple "404 - Not found" text will be displayed. */
-	render404?(): Promise<any>;
+	render404?(): Promise<{default: Component}>;
 }
 
 /**
