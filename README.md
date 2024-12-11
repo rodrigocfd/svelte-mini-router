@@ -45,6 +45,9 @@ export const routerConf: RouterConf = {
 
         // another page
         {path: '/page1', render: () => import('./pages/page1/Page1.svelte')},
+
+        // nested routes are up to you
+        {path: '/foo/bar/stuff', render: () => import('./pages/page1/Page1.svelte')},
     ],
 
     // if you use a base URL, set it here
