@@ -2,7 +2,7 @@
 	@component Renders the current route component.
 -->
 <script lang="ts">
-import {type RouterConf} from './types';
+import type {LazyComponent, RouterConf} from './types';
 import {findCurrentRoute, initInternalState} from './state.svelte';
 
 const props: {
@@ -16,20 +16,20 @@ initInternalState(props.routerConf.baseUrl);
 const currentRoute = $derived(findCurrentRoute(props.routerConf.routes));
 </script>
 
+{#snippet asyncComponent(lazyComp: LazyComponent)}
+	{#await lazyComp()}
+		{props.routerConf.loadingText || 'Loading...'}
+	{:then {default: UserComp}}
+		<UserComp />
+	{/await}
+{/snippet}
+
 {#if currentRoute === undefined}
 	{#if props.routerConf.render404 !== undefined}
-		{#await props.routerConf.render404()}
-			{props.routerConf.loadingText || 'Loading...'}
-		{:then {default: Route404Component}}
-			<Route404Component />
-		{/await}
+		{@render asyncComponent(props.routerConf.render404)}
 	{:else}
 		404 - Not found
 	{/if}
 {:else}
-	{#await currentRoute.render()}
-		{props.routerConf.loadingText || 'Loading...'}
-	{:then {default: RouteComponent}}
-		<RouteComponent />
-	{/await}
+	{@render asyncComponent(currentRoute.render)}
 {/if}

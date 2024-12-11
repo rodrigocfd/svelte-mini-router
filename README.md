@@ -6,7 +6,7 @@ Features:
 
 * declarative;
 * tiny API – 2 components and 1 function;
-* tiny size – about 7 KB;
+* tiny size – about 8 KB;
 * works without SvelteKit – perfect for SPAs created with [Vite](https://vite.dev/guide/#scaffolding-your-first-vite-project);
 * scalable – routes are lazy-loaded;
 * built-in TypeScript support.
@@ -73,6 +73,19 @@ Finally add the router component to your `App.svelte`:
 
 ### Navigating
 
+Programmatically navigating to a route:
+
+```ts
+import {navigate} from 'svelte-mini-router';
+
+// without query parameters
+navigate('/page1');
+
+// with query parameters
+// means "/page1?name=Joe&age=43"
+navigate('/page1', {name: 'Joe', age: 43});
+```
+
 Creating an `<a href="">` element to a route:
 
 ```svelte
@@ -80,15 +93,15 @@ Creating an `<a href="">` element to a route:
     import {Link} from 'svelte-mini-router';
 </script>
 
-<Link path="/page1">Go to Page 1</Link>
-```
+<!-- without query parameters -->
+<Link path="/page1">
+    Go to Page 1
+</Link>
 
-Programmatically navigating to a route:
-
-```ts
-import {navigate} from 'svelte-mini-router';
-
-navigate('/page1');
+<!-- with query parameters -->
+<Link path="/page1" params={{name: 'Joe', age: 43}}>
+    Go to Page 1
+</Link>
 ```
 
 ## License
