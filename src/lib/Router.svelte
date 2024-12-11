@@ -2,7 +2,8 @@
 	@component Renders the current route component.
 -->
 <script lang="ts">
-import {type RouterConf, findCurrentRoute, initInternalState} from './funcs.svelte';
+import {type RouterConf} from './types';
+import {findCurrentRoute, initInternalState} from './funcs.svelte';
 
 const props: {
 	/** Router configuration. */
