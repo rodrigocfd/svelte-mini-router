@@ -40,3 +40,8 @@ export interface RouterConf {
 	 */
 	loadingText?: string;
 }
+
+/**
+ * Parameters of a GET request.
+ */
+export type GetParameters = Record<string, string | number | null | undefined>;

@@ -6,7 +6,9 @@ import {type RouterConf} from './types';
 import {findCurrentRoute, initInternalState} from './state.svelte';
 
 const props: {
-	/** Router configuration. */
+	/**
+	 * Router configuration.
+	 */
 	routerConf: RouterConf;
 } = $props();
 
