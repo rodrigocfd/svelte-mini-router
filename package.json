@@ -1,38 +1,73 @@
 {
-	"name": "wikipedia-templates",
-	"private": true,
+	"name": "svelte-mini-router",
 	"version": "1.0.0",
+	"description": "A declarative, minimal router for Svelte 5 without SvelteKit.",
+	"keywords": [
+		"client",
+		"declarative",
+		"kit",
+		"mini",
+		"page",
+		"router",
+		"svelte",
+		"sveltekit"
+	],
 	"author": {
 		"name": "Rodrigo César de Freitas Dias",
 		"email": "rcesar@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/rodrigocfd/wikipedia-templates.git"
+		"url": "git+https://github.com/rodrigocfd/svelte-mini-router.git"
 	},
-	"homepage": "https://rodrigocfd.github.io/wikipedia-templates",
-	"type": "module",
+	"bugs": {
+		"url": "https://github.com/rodrigocfd/svelte-mini-router/issues"
+	},
+	"homepage": "https://github.com/rodrigocfd/svelte-mini-router",
+	"license": "MIT",
 	"scripts": {
-		"dev": "vite",
-		"build": "npm run lint && vite build",
-		"lint": "eslint . --report-unused-disable-directives --max-warnings 0",
-		"preview": "vite preview",
-		"check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
+		"package": "cross-env NODE_ENV=production svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "npm run package",
+		"check": "cross-env NODE_ENV=production svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "eslint ."
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"peerDependencies": {
+		"svelte": "^5.10.1"
 	},
 	"devDependencies": {
-		"@eslint/js": "9.16.0",
-		"@stylistic/eslint-plugin": "2.12.1",
-		"@sveltejs/vite-plugin-svelte": "5.0.1",
-		"@tsconfig/svelte": "5.0.4",
-		"@types/node": "22.10.2",
-		"eslint": "9.16.0",
-		"globals": "15.13.0",
-		"svelte": "5.10.1",
-		"svelte-check": "4.1.1",
-		"svelte-eslint-parser": "0.43.0",
-		"tslib": "2.8.1",
-		"typescript": "5.7.2",
-		"typescript-eslint": "8.18.0",
-		"vite": "6.0.3"
+		"@eslint/compat": "^1.2.4",
+		"@stylistic/eslint-plugin": "^2.12.1",
+		"@sveltejs/adapter-auto": "^3.3.1",
+		"@sveltejs/kit": "^2.10.1",
+		"@sveltejs/package": "^2.3.7",
+		"@sveltejs/vite-plugin-svelte": "^5.0.1",
+		"cross-env": "^7.0.3",
+		"eslint": "^9.16.0",
+		"eslint-plugin-svelte": "^2.46.1",
+		"globals": "^15.13.0",
+		"publint": "^0.2.12",
+		"svelte": "^5.10.1",
+		"svelte-check": "^4.1.1",
+		"typescript": "~5.7.2",
+		"typescript-eslint": "^8.18.0",
+		"vite": "^6.0.3"
 	}
 }

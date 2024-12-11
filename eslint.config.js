@@ -1,27 +1,30 @@
-import globals from 'globals';
 import js from '@eslint/js';
+import {includeIgnoreFile} from '@eslint/compat';
+import svelte from 'eslint-plugin-svelte';
 import stylistic from '@stylistic/eslint-plugin';
-import svelteParser from 'svelte-eslint-parser';
-import tseslint from 'typescript-eslint';
+import globals from 'globals';
+import {fileURLToPath} from 'node:url';
+import ts from 'typescript-eslint';
+const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
-export default tseslint.config(
-	{ignores: ['build']},
-	{extends: [js.configs.recommended, ...tseslint.configs.recommended]},
+export default ts.config(
+	includeIgnoreFile(gitignorePath),
+	js.configs.recommended,
+	...ts.configs.recommended,
+	...svelte.configs['flat/recommended'],
 	{
-		files: ['**/*.{ts,tsx}'],
 		languageOptions: {
-			ecmaVersion: 2020,
-			globals: globals.browser,
+			globals: {
+				...globals.browser,
+				...globals.node,
+			},
 		},
 	},
 	{
-		files: ['**/*.{svelte}'],
+		files: ['**/*.svelte'],
 		languageOptions: {
-			ecmaVersion: 2020,
-			globals: globals.browser,
-			parser: svelteParser,
 			parserOptions: {
-				parser: tseslint,
+				parser: ts.parser,
 			},
 		},
 	},
