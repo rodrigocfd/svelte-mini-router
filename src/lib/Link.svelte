@@ -3,7 +3,7 @@
 -->
 <script lang="ts">
 import type {Snippet} from 'svelte';
-import {generateFullUrl, navigate} from './funcs.svelte';
+import {generateFullUrl, navigate} from './state.svelte';
 
 const props: {
 	/** Route path to redirect when the anchor is clicked. */

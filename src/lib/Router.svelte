@@ -3,7 +3,7 @@
 -->
 <script lang="ts">
 import {type RouterConf} from './types';
-import {findCurrentRoute, initInternalState} from './funcs.svelte';
+import {findCurrentRoute, initInternalState} from './state.svelte';
 
 const props: {
 	/** Router configuration. */

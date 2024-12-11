@@ -6,6 +6,7 @@ Features:
 
 * declarative;
 * tiny API – 2 components and 1 function;
+* tiny size – about 5 KB;
 * works without SvelteKit – perfect for SPAs created with [Vite](https://vite.dev/guide/#scaffolding-your-first-vite-project);
 * scalable – routes are lazy-loaded;
 * built-in TypeScript support.
