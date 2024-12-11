@@ -1,5 +1,5 @@
 <script lang="ts">
-import {AppRouter} from '@/router';
+import {Router} from '@/router';
 
 const routerConf = {
 	baseUrl: '/wikipedia-templates',
@@ -14,7 +14,7 @@ const routerConf = {
 
 <h1>Wikipedia Templates</h1>
 
-<AppRouter {routerConf} />
+<Router {routerConf} />
 
 <style>
 	h1 {

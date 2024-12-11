@@ -1,3 +1,8 @@
-export {type Route, navigate} from './funcs.svelte';
-export {default as AppRouter} from './AppRouter.svelte';
+export {
+	type Route,
+	type RouterConf,
+	navigate,
+} from './funcs.svelte';
+
+export {default as Router} from './Router.svelte';
 export {default as Link} from './Link.svelte';

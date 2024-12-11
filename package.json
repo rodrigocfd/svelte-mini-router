@@ -1,7 +1,16 @@
 {
 	"name": "wikipedia-templates",
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.0.0",
+	"author": {
+		"name": "Rodrigo César de Freitas Dias",
+		"email": "rcesar@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rodrigocfd/wikipedia-templates.git"
+	},
+	"homepage": "https://rodrigocfd.github.io/wikipedia-templates",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -12,13 +21,13 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "9.16.0",
-		"@stylistic/eslint-plugin": "2.12.0",
+		"@stylistic/eslint-plugin": "2.12.1",
 		"@sveltejs/vite-plugin-svelte": "5.0.1",
 		"@tsconfig/svelte": "5.0.4",
-		"@types/node": "22.10.1",
+		"@types/node": "22.10.2",
 		"eslint": "9.16.0",
 		"globals": "15.13.0",
-		"svelte": "5.10.0",
+		"svelte": "5.10.1",
 		"svelte-check": "4.1.1",
 		"svelte-eslint-parser": "0.43.0",
 		"tslib": "2.8.1",

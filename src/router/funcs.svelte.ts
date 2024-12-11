@@ -77,8 +77,8 @@ export function generateFullUrl(path: string): string {
 }
 
 /**
- * Navigates immediately to the given path, which will trigger the rendering of
- * the new route component.
+ * Programmatically, immediately navigates to the given path, which will trigger
+ * the rendering of the new route component.
  */
 export function navigate(path: string): void {
 	const path2 = sanitizePath(path);
@@ -88,7 +88,7 @@ export function navigate(path: string): void {
 
 /**
  * Back or forward button; updates current URL state, which will trigger the
- * rendering of the current route component.
+ * rendering of the new route component.
  */
 window.onpopstate = () => {
 	routerState.path = getCurrentUrlPath();
