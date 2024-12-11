@@ -1,4 +1,4 @@
-import type {GetParameters} from './types';
+import type {QueryParams} from './types';
 
 /**
  * Sanitizes the path, removing "/" prefix and suffix, and removing GET
@@ -16,10 +16,10 @@ export function sanitizePath(path: string): string {
 }
 
 /**
- * Serializes an object to a string to be used as GET parameters, including the
- * leading "?".
+ * Serializes an object to a string to be used as an URL query string, including
+ * the leading "?".
  */
-export function serializeGetParameters(params?: GetParameters): string {
+export function serializeGetParameters(params?: QueryParams): string {
 	const output: Record<string, string> = {};
 	if (params !== undefined) {
 		for (const [key, val] of Object.entries(params)) {

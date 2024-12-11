@@ -42,6 +42,6 @@ export interface RouterConf {
 }
 
 /**
- * Parameters of a GET request.
+ * URL query parameters.
  */
-export type GetParameters = Record<string, string | number | null | undefined>;
+export type QueryParams = Record<string, string | number | null | undefined>;

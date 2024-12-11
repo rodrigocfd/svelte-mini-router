@@ -3,7 +3,7 @@
 -->
 <script lang="ts">
 import type {Snippet} from 'svelte';
-import type {GetParameters} from './types';
+import type {QueryParams} from './types';
 import {generateFullUrl, navigate} from './state.svelte';
 
 const props: {
@@ -12,9 +12,9 @@ const props: {
 	 */
 	path: string;
 	/**
-	 * Object with GET parameters; optional.
+	 * URL query parameters; optional.
 	 */
-	params?: GetParameters;
+	params?: QueryParams;
 	children: Snippet;
 } = $props();
 

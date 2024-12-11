@@ -1,6 +1,6 @@
 # Svelte Mini Router
 
-A declarative, minimal router for Svelte 5 **without** SvelteKit.
+A declarative, minimal SPA router for Svelte 5, without SvelteKit. 
 
 Features:
 
@@ -94,4 +94,3 @@ navigate('/page1');
 ## License
 
 Licensed under [MIT license](https://opensource.org/licenses/MIT), see [LICENSE.md](LICENSE.md) for details.
-'

@@ -1,4 +1,4 @@
-import type {GetParameters, Route} from './types';
+import type {QueryParams, Route} from './types';
 import {sanitizePath, serializeGetParameters} from './utils';
 
 /**
@@ -47,7 +47,7 @@ export function findCurrentRoute(routes: Route[]): Route | undefined {
 /**
  * Generates a fully-qualified URL to the given path.
  */
-export function generateFullUrl(path: string, params?: GetParameters): string {
+export function generateFullUrl(path: string, params?: QueryParams): string {
 	return '/' + routerState.baseUrl + '/'
 		+ sanitizePath(path)
 		+ serializeGetParameters(params);
@@ -59,7 +59,7 @@ export function generateFullUrl(path: string, params?: GetParameters): string {
  *
  * You can pass, optionally, an object to be serialized as GET parameters.
  */
-export function navigate(path: string, params?: GetParameters): void {
+export function navigate(path: string, params?: QueryParams): void {
 	const newPath = sanitizePath(path);
 	history.pushState(null, '',
 		'/' + routerState.baseUrl + '/' + newPath + serializeGetParameters(params));
