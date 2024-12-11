@@ -4,9 +4,13 @@ import type {Component} from 'svelte';
  * Path and component to an application route, to be defined by the user.
  */
 export interface Route {
-	/** URL path to match. */
+	/**
+	 * URL path to match.
+	 */
 	path: string;
-	/** Function which lazy loads the component to be rendered. */
+	/**
+	 * Function which lazy loads the component to be rendered.
+	 */
 	render(): Promise<{default: Component}>;
 }
 
@@ -14,10 +18,25 @@ export interface Route {
  * Router configuration.
  */
 export interface RouterConf {
-	/** Base URL, as defined in vite.config.ts. */
+	/**
+	 * Base URL, as defined in vite.config.ts.
+	 */
 	baseUrl?: string;
-	/** Application routes. */
+	/**
+	 * Application routes.
+	 */
 	routes: Route[];
-	/** Error 404 route; if not defined, a simple "404 - Not found" text will be displayed. */
+	/**
+	 * Error 404 route.
+	 *
+	 * If not defined, a simple "404 - Not found" text will be displayed.
+	 */
 	render404?(): Promise<{default: Component}>;
+	/**
+	 * Text to be displayed if the route takes too long to load. This shouldn't
+	 * really be necessary, since the routes are served as plain static assets.
+	 *
+	 * Defaults to "Loading...".
+	 */
+	loadingText?: string;
 }

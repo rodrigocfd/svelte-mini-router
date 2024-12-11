@@ -16,14 +16,18 @@ const currentRoute = $derived(findCurrentRoute(props.routerConf.routes));
 
 {#if currentRoute === undefined}
 	{#if props.routerConf.render404 !== undefined}
-		{#await props.routerConf.render404() then {default: Route404Component}}
+		{#await props.routerConf.render404()}
+			{props.routerConf.loadingText || 'Loading...'}
+		{:then {default: Route404Component}}
 			<Route404Component />
 		{/await}
 	{:else}
 		404 - Not found
 	{/if}
 {:else}
-	{#await currentRoute.render() then {default: RouteComponent}}
+	{#await currentRoute.render()}
+		{props.routerConf.loadingText || 'Loading...'}
+	{:then {default: RouteComponent}}
 		<RouteComponent />
 	{/await}
 {/if}
