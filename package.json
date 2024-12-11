@@ -1,6 +1,6 @@
 {
 	"name": "svelte-mini-router",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A declarative, minimal router for Svelte 5 without SvelteKit.",
 	"keywords": [
 		"client",
