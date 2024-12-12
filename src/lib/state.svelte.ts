@@ -10,15 +10,15 @@ const routerState = $state({
 	 */
 	baseUrl: '',
 	/**
-	 * Current path without baseUrl, no "/" prefix or suffix. Won't include GET
-	 * parameters.
+	 * Current path without baseUrl, no "/" prefix or suffix. Won't include URL
+	 * query parameters.
 	 */
 	path: '',
 });
 
 /**
  * Returns the current path without baseUrl, no "/" prefix or suffix. Won't
- * include GET parameters.
+ * include URL query parameters.
  */
 function getCurrentUrlPath(): string {
 	const allParts = window.location.pathname.split('/').filter(p => p !== '');
@@ -57,7 +57,7 @@ export function generateFullUrl(path: string, params?: QueryParams): string {
  * Programmatically, immediately navigates to the given path, which will trigger
  * the rendering of the new route component.
  *
- * You can pass, optionally, an object to be serialized as GET parameters.
+ * You can pass, optionally, an object to be serialized as URL query parameters.
  */
 export function navigate(path: string, params?: QueryParams): void {
 	const newPath = sanitizePath(path);

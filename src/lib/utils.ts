@@ -1,7 +1,19 @@
 import type {QueryParams} from './types';
 
 /**
- * Sanitizes the path, removing "/" prefix and suffix, and removing GET
+ * Returns an object with the current URL query parameters, if any.
+ */
+export function getQueryParams(): Record<string, string> {
+	const q = new URLSearchParams(window.location.search);
+	const output: Record<string, string> = {};
+	for (const [k, v] of q.entries()) {
+		output[k] = v;
+	}
+	return output;
+}
+
+/**
+ * Sanitizes the path, removing "/" prefix and suffix, and removing URL query
  * parameters.
  */
 export function sanitizePath(path: string): string {
