@@ -35,7 +35,7 @@ src/
 └─ routerConf.ts
 ```
 
-Configure your router:
+Declare your router:
 
 ```ts
 import {type RouterConf} from 'svelte-mini-router';
