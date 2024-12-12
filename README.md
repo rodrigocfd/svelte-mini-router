@@ -5,10 +5,10 @@ A declarative, minimal SPA router for Svelte 5, without SvelteKit.
 Features:
 
 * declarative, independent from directory structure
-* tiny API (see below)
+* small API (see below)
     * 2 components – `Router` and `Link`
     * 2 functions – `navigate` and `getQueryParams`
-* tiny size – about 9 KB
+* small size – about 7 KB
 * works without SvelteKit – perfect for SPAs created with [Vite](https://vite.dev/guide/#scaffolding-your-first-vite-project)
 * scalable – routes are lazy-loaded
 * built-in TypeScript support
@@ -25,15 +25,15 @@ Example folder structure:
 
 ```
 src/
-├ pages/
-│ ├ home/
-│ │ └ MyHome.svelte
-│ └ page1/
-│   └ Page1.svelte
-├ App.svelte
-├ Error404.svelte
-├ main.ts
-└ routerConf.ts
+├─ pages/
+│ ├─ home/
+│ │ └─ MyHome.svelte
+│ └─ page1/
+│   └─ Page1.svelte
+├─ App.svelte
+├─ Error404.svelte
+├─ main.ts
+└─ routerConf.ts
 ```
 
 Configure your router:
@@ -75,20 +75,7 @@ Finally add the `Router` component to your `App.svelte`:
 
 ### Navigating
 
-Programmatically navigating to a route with `navigate` function:
-
-```ts
-import {navigate} from 'svelte-mini-router';
-
-// without query parameters
-navigate('/page1');
-
-// with query parameters
-// means "/page1?name=Joe&age=43"
-navigate('/page1', {name: 'Joe', age: 43});
-```
-
-Creating an `<a href="">` element to a route with the `Link` component:
+Rendering an `<a href="">` element to a route with the `Link` component:
 
 ```svelte
 <script lang="ts">
@@ -101,9 +88,23 @@ Creating an `<a href="">` element to a route with the `Link` component:
 </Link>
 
 <!-- with query parameters -->
+<!-- means "/page1?name=Joe&age=43" -->
 <Link path="/page1" params={{name: 'Joe', age: 43}}>
     Go to Page 1
 </Link>
+```
+
+Programmatically navigating to a route with `navigate` function:
+
+```ts
+import {navigate} from 'svelte-mini-router';
+
+// without query parameters
+navigate('/page1');
+
+// with query parameters
+// means "/page1?name=Joe&age=43"
+navigate('/page1', {name: 'Joe', age: 43});
 ```
 
 ### Parameters
