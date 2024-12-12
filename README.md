@@ -4,12 +4,14 @@ A declarative, minimal SPA router for Svelte 5, without SvelteKit.
 
 Features:
 
-* declarative;
-* tiny API – 2 components and 2 functions;
-* tiny size – about 9 KB;
-* works without SvelteKit – perfect for SPAs created with [Vite](https://vite.dev/guide/#scaffolding-your-first-vite-project);
-* scalable – routes are lazy-loaded;
-* built-in TypeScript support.
+* declarative, independent from directory structure
+* tiny API
+    * 2 components – `Router` and `Link`
+    * 2 functions – `navigate` and `getQueryParams`
+* tiny size – about 9 KB
+* works without SvelteKit – perfect for SPAs created with [Vite](https://vite.dev/guide/#scaffolding-your-first-vite-project)
+* scalable – routes are lazy-loaded
+* built-in TypeScript support
 
 ## Usage
 
@@ -106,7 +108,7 @@ Creating an `<a href="">` element to a route:
 
 ### Parameters
 
-Current URL query parameters get be retrieved as an object:
+Current URL query parameters can be retrieved as an object:
 
 ```ts
 import {getQueryParams} from 'svelte-mini-router';
