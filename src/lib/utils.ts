@@ -2,6 +2,13 @@ import type {QueryParams} from './types';
 
 /**
  * Returns an object with the current URL query parameters, if any.
+ *
+ * @example
+ * // https://localhost:8080/?name=Joe&age=43
+ * const queryParams = {
+ *   name: 'Joe',
+ *   age: '43',
+ * };
  */
 export function getQueryParams(): Record<string, string> {
 	const q = new URLSearchParams(window.location.search);
@@ -30,7 +37,7 @@ export function sanitizePath(path: string): string {
  * Serializes an object to a string to be used as an URL query string, including
  * the leading "?".
  */
-export function serializeGetParameters(params?: QueryParams): string {
+export function serializeQueryParameters(params?: QueryParams): string {
 	const output: Record<string, string> = {};
 	if (params !== undefined) {
 		for (const [key, val] of Object.entries(params)) {

@@ -3,7 +3,7 @@
 -->
 <script lang="ts">
 import type {LazyComponent, RouterConf} from './types';
-import {findCurrentRoute, initInternalState} from './state.svelte';
+import routerState from './state.svelte';
 
 const props: {
 	/**
@@ -12,9 +12,18 @@ const props: {
 	routerConf: RouterConf;
 } = $props();
 
-initInternalState(props.routerConf.baseUrl);
-const currentRoute = $derived(findCurrentRoute(props.routerConf.routes));
+routerState.init(props.routerConf);
 </script>
+
+{#if routerState.curComponent === undefined}
+	{#if props.routerConf.render404 !== undefined}
+		{@render asyncComponent(props.routerConf.render404)}
+	{:else}
+		404 - Not found
+	{/if}
+{:else}
+	{@render asyncComponent(routerState.curComponent)}
+{/if}
 
 {#snippet asyncComponent(lazyComp: LazyComponent)}
 	{#await lazyComp()}
@@ -23,13 +32,3 @@ const currentRoute = $derived(findCurrentRoute(props.routerConf.routes));
 		<UserComp />
 	{/await}
 {/snippet}
-
-{#if currentRoute === undefined}
-	{#if props.routerConf.render404 !== undefined}
-		{@render asyncComponent(props.routerConf.render404)}
-	{:else}
-		404 - Not found
-	{/if}
-{:else}
-	{@render asyncComponent(currentRoute.render)}
-{/if}

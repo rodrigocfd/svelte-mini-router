@@ -9,7 +9,7 @@ import type {Component} from 'svelte';
 export type LazyComponent = () => Promise<{default: Component}>;
 
 /**
- * URL query parameters.
+ * URL query parameters. Besides string, also accepts number as value.
  *
  * @example
  * const params = {
@@ -37,7 +37,7 @@ export interface Route {
 	 */
 	path: string;
 	/**
-	 * Function which lazy loads the component to be rendered.
+	 * Function which lazy-loads the component to be rendered.
 	 *
 	 * @example
 	 * render: () => import('./page1/Page1.svelte')

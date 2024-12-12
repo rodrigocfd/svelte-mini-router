@@ -4,7 +4,7 @@
 <script lang="ts">
 import type {Snippet} from 'svelte';
 import type {QueryParams} from './types';
-import {generateFullUrl, navigate} from './state.svelte';
+import routerState from './state.svelte';
 
 const props: {
 	/**
@@ -20,10 +20,10 @@ const props: {
 
 function clicked(ev: MouseEvent & {currentTarget: EventTarget & HTMLAnchorElement}): void {
 	ev.preventDefault();
-	navigate(props.path, props.params);
+	routerState.navigate(props.path, props.params);
 }
 </script>
 
-<a href={generateFullUrl(props.path, props.params)} onclick={clicked}>
+<a href={routerState.generateFullUrl(props.path, props.params)} onclick={clicked}>
 	{@render props.children()}
 </a>
