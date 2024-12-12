@@ -42,9 +42,6 @@ export function initInternalState(baseUrl?: string): void {
 export function findCurrentRoute(routes: Route[]): Route | undefined {
 	return routes.find(r => {
 		const rParts = sanitizePath(r.path).split('/');
-
-		console.log('>', rParts, routerState.pathParts, sanitizePath(window.location.pathname), routerState.baseUrl);
-
 		if (rParts.length !== routerState.pathParts.length)
 			return false;
 		for (let i = 0; i < rParts.length; ++i) {
