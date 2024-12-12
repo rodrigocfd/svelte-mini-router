@@ -5,7 +5,7 @@ A declarative, minimal SPA router for Svelte 5, without SvelteKit.
 Features:
 
 * declarative, independent from directory structure
-* tiny API
+* tiny API (see below)
     * 2 components – `Router` and `Link`
     * 2 functions – `navigate` and `getQueryParams`
 * tiny size – about 9 KB
@@ -53,7 +53,7 @@ export const routerConf: RouterConf = {
         {path: '/foo/bar/stuff', render: () => import('./pages/page1/Page1.svelte')},
     ],
 
-    // if you use a base URL, set it here
+    // if you use a base URL, set it here; optional
     baseUrl: '/my-web-application',
 
     // error 404 route; optional
@@ -62,7 +62,7 @@ export const routerConf: RouterConf = {
 };
 ```
 
-Finally add the router component to your `App.svelte`:
+Finally add the `Router` component to your `App.svelte`:
 
 ```svelte
 <script lang="ts">
@@ -75,7 +75,7 @@ Finally add the router component to your `App.svelte`:
 
 ### Navigating
 
-Programmatically navigating to a route:
+Programmatically navigating to a route with `navigate` function:
 
 ```ts
 import {navigate} from 'svelte-mini-router';
@@ -88,7 +88,7 @@ navigate('/page1');
 navigate('/page1', {name: 'Joe', age: 43});
 ```
 
-Creating an `<a href="">` element to a route:
+Creating an `<a href="">` element to a route with the `Link` component:
 
 ```svelte
 <script lang="ts">
@@ -108,7 +108,7 @@ Creating an `<a href="">` element to a route:
 
 ### Parameters
 
-Current URL query parameters can be retrieved as an object:
+Current URL query parameters can be retrieved as an object with `getQueryParams` function:
 
 ```ts
 import {getQueryParams} from 'svelte-mini-router';
