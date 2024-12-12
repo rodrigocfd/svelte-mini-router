@@ -4,11 +4,10 @@ A declarative, minimal SPA router for Svelte 5, without SvelteKit.
 
 Features:
 
-* declarative, independent from directory structure
+* declarative – works with any directory structure
 * small API (see below)
     * 2 components – `Router` and `Link`
-    * 2 functions – `navigate` and `getQueryParams`
-* small size – about 7 KB
+    * 3 functions – `navigate`, `getPathParams` and `getQueryParams`
 * works without SvelteKit – perfect for SPAs created with [Vite](https://vite.dev/guide/#scaffolding-your-first-vite-project)
 * scalable – routes are lazy-loaded
 * built-in TypeScript support
@@ -21,15 +20,15 @@ Install the package:
 npm i svelte-mini-router
 ```
 
-Example folder structure:
+Folder structure has no rules, you can organize the way you want. For example:
 
 ```
 src/
 ├─ pages/
-│ ├─ home/
-│ │ └─ MyHome.svelte
-│ └─ page1/
-│   └─ Page1.svelte
+│  ├─ home/
+│  │  └─ MyHome.svelte
+│  └─ page1/
+│     └─ Page1.svelte
 ├─ App.svelte
 ├─ Error404.svelte
 ├─ main.ts
@@ -51,6 +50,9 @@ export const routerConf: RouterConf = {
 
         // nested routes are up to you
         {path: '/foo/bar/stuff', render: () => import('./pages/page1/Page1.svelte')},
+
+        // you can use path parameters anywhere
+        {path: '/foo/{name}/and/{age}', render: () => import('./pages/page1/Page1.svelte')},
     ],
 
     // if you use a base URL, set it here; optional
@@ -109,12 +111,25 @@ navigate('/page1', {name: 'Joe', age: 43});
 
 ### Parameters
 
-Current URL query parameters can be retrieved as an object with `getQueryParams` function:
+Current URL path parameters can be retrieved as an object with `getPathParams` function:
+
+```ts
+import {getPathParams} from 'svelte-mini-router';
+
+// from "/foo/{name}/and/{age}"
+// then "/foo/Joe/and/43"
+const pathParams = getPathParams();
+// will be {name: 'Joe', age: '43'}
+```
+
+And query parameters with `getQueryParams` function:
 
 ```ts
 import {getQueryParams} from 'svelte-mini-router';
 
+// from "/page1?name=Joe&age=43"
 const queryParams = getQueryParams();
+// will be {name: 'Joe', age: '43'}
 ```
 
 ## License

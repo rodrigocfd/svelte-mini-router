@@ -20,6 +20,13 @@ export function getQueryParams(): Record<string, string> {
 }
 
 /**
+ * Tells whether the string is within "{}".
+ */
+export function isPathParam(s: string): boolean {
+	return s.startsWith('{') && s.endsWith('}');
+}
+
+/**
  * Removes leading and trailing "/", and URL query parameters.
  */
 export function sanitizePath(path: string): string {

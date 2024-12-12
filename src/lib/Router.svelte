@@ -15,14 +15,14 @@ const props: {
 routerState.init(props.routerConf);
 </script>
 
-{#if routerState.curComponent === undefined}
+{#if routerState.curUserRoute === undefined}
 	{#if props.routerConf.render404 !== undefined}
 		{@render asyncComponent(props.routerConf.render404)}
 	{:else}
 		404 - Not found
 	{/if}
 {:else}
-	{@render asyncComponent(routerState.curComponent)}
+	{@render asyncComponent(routerState.curUserRoute.render)}
 {/if}
 
 {#snippet asyncComponent(lazyComp: LazyComponent)}

@@ -1,5 +1,5 @@
 import type {LazyComponent, QueryParams, RouterConf} from './types';
-import {sanitizePath, serializeQueryParameters} from './utils';
+import {isPathParam, sanitizePath, serializeQueryParameters} from './utils';
 
 class RouterState {
 	/** Application base URL; no leading or trailing "/", no URL query parameters. */
@@ -14,17 +14,19 @@ class RouterState {
 		render: LazyComponent;
 	}[]);
 
-	/** Component to be currently rendered, if any */
-	curComponent = $derived(
-		this.userRoutes.find(r => {
-			if (this.curPathParts.length !== r.pathParts.length)
+	/** User route to be currently rendered, if any. */
+	curUserRoute = $derived(
+		this.userRoutes.find(userRoute => {
+			if (this.curPathParts.length !== userRoute.pathParts.length)
 				return false;
 			for (let i = 0; i < this.curPathParts.length; ++i) {
-				if (this.curPathParts[i] !== r.pathParts[i])
+				if (isPathParam(userRoute.pathParts[i]))
+					continue;
+				if (this.curPathParts[i] !== userRoute.pathParts[i])
 					return false;
 			}
 			return true;
-		})?.render,
+		}),
 	);
 
 	constructor() {
@@ -35,14 +37,17 @@ class RouterState {
 
 	/** Initializes the router internal state with the user options. */
 	init(conf: RouterConf): void {
-		if (conf.baseUrl !== undefined) {
+		if (conf.baseUrl !== undefined)
 			this.baseUrl = sanitizePath(conf.baseUrl);
-		}
 		this.curPathParts = this.getCurrentUrlPathParts();
-		this.userRoutes = conf.routes.map(r => ({
-			pathParts: sanitizePath(r.path).split('/'),
-			render: r.render,
-		}));
+		this.userRoutes = conf.routes.map((userRoute, i) => {
+			if (isPathParam(userRoute.path) && userRoute.path.length < 3)
+				throw new Error(`Path parameter ${i} cannot be empty.`);
+			return  {
+				pathParts: sanitizePath(userRoute.path).split('/'),
+				render: userRoute.render,
+			};
+		});
 	}
 
 	/** Returns the current path parts without baseUrl, without URL query parameters. */
@@ -66,11 +71,41 @@ class RouterState {
 			'/' + routerState.baseUrl + '/' + newPath + serializeQueryParameters(queryParams));
 		this.curPathParts = newPath.split('/');
 	}
+
+	/** Returns an object with the current URL path parameters, if any. */
+	getPathParams(): Record<string, string> {
+		const output: Record<string, string> = {};
+		const curParts = this.getCurrentUrlPathParts();
+		const userRoute = this.curUserRoute;
+		if (userRoute !== undefined) {
+			for (let i = 0; i < curParts.length; ++i) {
+				if (isPathParam(userRoute.pathParts[i])) {
+					const paramName = userRoute.pathParts[i];
+					output[paramName.substring(1, paramName.length - 1)] = curParts[i];
+				}
+			}
+		}
+		return output;
+	}
 }
 
 /** Global router state. */
 const routerState = new RouterState();
 export default routerState;
+
+/**
+ * Returns an object with the current URL path parameters, if any.
+ *
+ * @example
+ * // https://localhost:8080/person/{name}/with/{age}
+ * const pathParams = {
+ *   name: 'value at {name}',
+ *   age: 'value at {age}',
+ * };
+ */
+export function getPathParams(): Record<string, string> {
+	return routerState.getPathParams();
+}
 
 /**
  * Programmatically, immediately navigates to the given path, which will trigger
