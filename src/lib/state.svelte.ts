@@ -6,25 +6,24 @@ import {sanitizePath, serializeGetParameters} from './utils';
  */
 const routerState = $state({
 	/**
-	 * Application baseUrl, no "/" prefix or suffix.
+	 * Application base URL, no leading or trailing "/", no URL query
+	 * parameters.
 	 */
 	baseUrl: '',
 	/**
-	 * Current path without baseUrl, no "/" prefix or suffix. Won't include URL
-	 * query parameters.
+	 * Parts of the current path, without baseUrl. Won't include URL query
+	 * parameters.
 	 */
-	path: '',
+	pathParts: [] as string[],
 });
 
 /**
- * Returns the current path without baseUrl, no "/" prefix or suffix. Won't
- * include URL query parameters.
+ * Returns the current path parts without baseUrl, without URL query parameters.
  */
-function getCurrentUrlPath(): string {
-	const allParts = window.location.pathname.split('/').filter(p => p !== '');
-	const idxBasePart = allParts.findIndex(p => p === routerState.baseUrl);
-	const parts = allParts.slice(idxBasePart + 1);
-	return parts.join('/');
+function getCurrentUrlPathParts(): string[] {
+	return sanitizePath(window.location.pathname)
+		.substring(routerState.baseUrl.length + 1)
+		.split('/');
 }
 
 /**
@@ -34,14 +33,26 @@ export function initInternalState(baseUrl?: string): void {
 	if (baseUrl !== undefined) {
 		routerState.baseUrl = sanitizePath(baseUrl);
 	}
-	routerState.path = getCurrentUrlPath();
+	routerState.pathParts = getCurrentUrlPathParts();
 }
 
 /**
- * Returns the current route, if any.
+ * Among the given routes, returns the current route, if any.
  */
 export function findCurrentRoute(routes: Route[]): Route | undefined {
-	return routes.find(r => sanitizePath(r.path) === routerState.path);
+	return routes.find(r => {
+		const rParts = sanitizePath(r.path).split('/');
+
+		console.log('>', rParts, routerState.pathParts, sanitizePath(window.location.pathname), routerState.baseUrl);
+
+		if (rParts.length !== routerState.pathParts.length)
+			return false;
+		for (let i = 0; i < rParts.length; ++i) {
+			if (rParts[i] !== routerState.pathParts[i])
+				return false;
+		}
+		return true;
+	});
 }
 
 /**
@@ -63,7 +74,7 @@ export function navigate(path: string, params?: QueryParams): void {
 	const newPath = sanitizePath(path);
 	history.pushState(null, '',
 		'/' + routerState.baseUrl + '/' + newPath + serializeGetParameters(params));
-	routerState.path = newPath;
+	routerState.pathParts = newPath.split('/');
 }
 
 /**
@@ -71,5 +82,5 @@ export function navigate(path: string, params?: QueryParams): void {
  * rendering of the new route component.
  */
 window.onpopstate = () => {
-	routerState.path = getCurrentUrlPath();
+	routerState.pathParts = getCurrentUrlPathParts();
 };

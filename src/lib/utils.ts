@@ -13,8 +13,7 @@ export function getQueryParams(): Record<string, string> {
 }
 
 /**
- * Sanitizes the path, removing "/" prefix and suffix, and removing URL query
- * parameters.
+ * Removes leading and trailing "/", and URL query parameters.
  */
 export function sanitizePath(path: string): string {
 	let p = path;
