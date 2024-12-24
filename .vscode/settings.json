@@ -1,0 +1,14 @@
+{
+	"editor.insertSpaces": false,
+	"eslint.validate": ["javascript", "svelte", "typescript"],
+	"files.eol": "\n",
+	"files.trimTrailingWhitespace": true,
+	"svelte.enable-ts-plugin": true,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+	"typescript.preferences.quoteStyle": "single",
+	"[javascript][svelte][typescript][typescriptreact]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit",
+		},
+	},
+}
