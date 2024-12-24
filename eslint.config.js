@@ -1,10 +1,12 @@
-import js from '@eslint/js';
-import {includeIgnoreFile} from '@eslint/compat';
-import svelte from 'eslint-plugin-svelte';
-import stylistic from '@stylistic/eslint-plugin';
-import globals from 'globals';
 import {fileURLToPath} from 'node:url';
+import {includeIgnoreFile} from '@eslint/compat';
+import js from '@eslint/js';
+import stylistic from '@stylistic/eslint-plugin';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import svelte from 'eslint-plugin-svelte';
+import globals from 'globals';
 import ts from 'typescript-eslint';
+
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
 export default ts.config(
@@ -30,6 +32,7 @@ export default ts.config(
 	},
 	{
 		plugins: {
+			'simple-import-sort': simpleImportSort,
 			'@stylistic': stylistic,
 		},
 		rules: {
@@ -37,10 +40,15 @@ export default ts.config(
 			'no-empty': 'warn',
 			'no-sparse-arrays': 'error',
 			'prefer-const': 'warn',
+			'simple-import-sort/exports': 'warn',
+			'simple-import-sort/imports': ['warn', {
+				groups: [['^\\u0000', '^node:', '^svelte$', '^@?\\w', '^', '^\\.', '^.+\\.css$']],
+			}],
 			'@stylistic/array-bracket-spacing': ['warn', 'never'],
 			'@stylistic/comma-dangle': ['warn', 'always-multiline'],
+			'@stylistic/comma-spacing': 'warn',
+			'@stylistic/eol-last': 'warn',
 			'@stylistic/indent': ['warn', 'tab'],
-			'@stylistic/jsx-quotes': ['warn', 'prefer-single'],
 			'@stylistic/key-spacing': ['warn', {beforeColon: false, afterColon: true, mode: 'minimum'}],
 			'@stylistic/member-delimiter-style': ['warn', {
 				multiline: {delimiter: 'semi', requireLast: true},

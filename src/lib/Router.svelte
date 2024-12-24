@@ -2,8 +2,8 @@
 	@component Renders the current route component.
 -->
 <script lang="ts">
-import type {LazyComponent, RouterConf} from './types';
 import routerState from './state.svelte';
+import type {LazyComponent, RouterConf} from './types';
 
 const props: {
 	/**

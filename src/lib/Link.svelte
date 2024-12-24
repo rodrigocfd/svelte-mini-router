@@ -3,8 +3,8 @@
 -->
 <script lang="ts">
 import type {Snippet} from 'svelte';
-import type {QueryParams} from './types';
 import routerState from './state.svelte';
+import type {QueryParams} from './types';
 
 const props: {
 	/**
