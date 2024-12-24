@@ -59,7 +59,7 @@ class RouterState {
 
 	/** Generates a fully-qualified URL to the given path. */
 	generateFullUrl(path: string, params?: QueryParams): string {
-		const basePath = routerState.baseUrl !== '' ? '/' + routerState.baseUrl : '';
+		const basePath = routerState.baseUrl !== '' ? ('/' + routerState.baseUrl) : '';
 		return basePath + '/'
 			+ sanitizePath(path)
 			+ serializeQueryParameters(params);
@@ -68,7 +68,7 @@ class RouterState {
 	/** Navigates to the given path. */
 	navigate(path: string, queryParams?: QueryParams): void {
 		const newPath = sanitizePath(path);
-		const basePath = routerState.baseUrl !== '' ? '/' + routerState.baseUrl : '';
+		const basePath = routerState.baseUrl !== '' ? ('/' + routerState.baseUrl) : '';
 		history.pushState(null, '',
 			basePath + '/' + newPath + serializeQueryParameters(queryParams));
 		this.curPathParts = newPath.split('/');
