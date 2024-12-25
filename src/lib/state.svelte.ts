@@ -52,8 +52,9 @@ class RouterState {
 
 	/** Returns the current path parts without baseUrl, without URL query parameters. */
 	getCurrentUrlPathParts(): string[] {
+		const slashOff = this.baseUrl !== '' ? 1 : 0;
 		return sanitizePath(window.location.pathname)
-			.substring(this.baseUrl.length + 1)
+			.substring(this.baseUrl.length + slashOff)
 			.split('/');
 	}
 
