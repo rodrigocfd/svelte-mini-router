@@ -2,17 +2,17 @@
 	@component Renders the current route component.
 -->
 <script lang="ts">
-import routerState from './state.svelte';
-import type {LazyComponent, RouterConf} from './types';
+	import routerState from './state.svelte';
+	import type {LazyComponent, RouterConf} from './types';
 
-const props: {
-	/**
+	const props: {
+		/**
 	 * Router configuration.
 	 */
-	routerConf: RouterConf;
-} = $props();
+		routerConf: RouterConf;
+	} = $props();
 
-routerState.init(props.routerConf);
+	routerState.init(props.routerConf);
 </script>
 
 {#if routerState.curUserRoute === undefined}

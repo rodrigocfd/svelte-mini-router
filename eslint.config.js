@@ -44,6 +44,11 @@ export default ts.config(
 			'simple-import-sort/imports': ['warn', {
 				groups: [['^\\u0000', '^node:', '^svelte$', '^@?\\w', '^', '^\\.', '^.+\\.css$']],
 			}],
+			'svelte/html-quotes': ['warn', {prefer: 'double'}],
+			'svelte/indent': ['warn', {indent: 'tab', indentScript: true}],
+			'svelte/no-spaces-around-equal-signs-in-attribute': 'warn',
+			'svelte/require-each-key': 'warn',
+			'svelte/valid-each-key': 'error',
 			'@stylistic/array-bracket-spacing': ['warn', 'never'],
 			'@stylistic/comma-dangle': ['warn', 'always-multiline'],
 			'@stylistic/comma-spacing': 'warn',
