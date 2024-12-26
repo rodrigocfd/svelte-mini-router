@@ -8,12 +8,12 @@
 
 	const props: {
 		/**
-	 * Route path to redirect when the anchor is clicked.
-	 */
+		 * Route path to redirect when the anchor is clicked.
+		 */
 		path: string;
 		/**
-	 * URL query parameters; optional.
-	 */
+	 	 * URL query parameters; optional.
+	 	 */
 		params?: QueryParams;
 		children: Snippet;
 	} = $props();
