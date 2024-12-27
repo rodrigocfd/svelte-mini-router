@@ -43,7 +43,7 @@ class RouterState {
 		this.userRoutes = conf.routes.map((userRoute, i) => {
 			if (isPathParam(userRoute.path) && userRoute.path.length < 3)
 				throw new Error(`Path parameter ${i} cannot be empty.`);
-			return  {
+			return {
 				pathParts: sanitizePath(userRoute.path).split('/'),
 				render: userRoute.render,
 			};
